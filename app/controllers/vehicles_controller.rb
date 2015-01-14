@@ -20,7 +20,13 @@ class VehiclesController < ApplicationController
 
   def destroy
     vehicle = @user.vehicles.find_by(id: params[:id])
-    vehicle.destroy
+
+    if vehicle
+      vehicle.destroy
+      render :json => { success: true }, :status => 200
+    else
+      render :json => { errors: ["Vehicle with id: #{params[:id]} not found"] }, :status => 404
+    end
   end
 
   private
@@ -40,7 +46,7 @@ class VehiclesController < ApplicationController
   def clear_params
     if params[:vehicles].blank?
       render :json => {
-        errors: "Please pass a vehicles paramters",
+        errors: ["Please pass parameters with a vehicles property"],
         example: {
           vehicles: {
             nickname: "Batmobile",
