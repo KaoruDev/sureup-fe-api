@@ -1,6 +1,7 @@
 class VehiclesController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :json_only!, :authenticate_user!, :clear_params
+  before_action :json_only!, :authenticate_user!
+  before_action :clear_params, :only => [:create, :update]
 
   def index
     render :json => @user.vehicles, :status => 200
