@@ -38,17 +38,19 @@ class VehiclesController < ApplicationController
   end
 
   def clear_params
-    render :json => {
-      errors: "Please pass a vehicles paramters",
-      example: {
-        vehicles: {
-          nickname: "Batmobile",
-          year: "2015",
-          model: "Bat",
-          make: "Waynes Auto"
+    if params[:vehicles].blank?
+      render :json => {
+        errors: "Please pass a vehicles paramters",
+        example: {
+          vehicles: {
+            nickname: "Batmobile",
+            year: "2015",
+            model: "Bat",
+            make: "Waynes Auto"
+          }
         }
-      }
-    }, :status => 406
+      }, :status => 406
+    end
   end
 
   def authenticate_user!
