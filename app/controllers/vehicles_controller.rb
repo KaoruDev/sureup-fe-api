@@ -13,13 +13,13 @@ class VehiclesController < ApplicationController
   end
 
   def update
-    @vehicle = @user.vehicles.find_by(params[:id])
+    @vehicle = @user.vehicles.find_by(id: params[:id])
     @vehicle.attributes = vehicle_params if @vehicle
     validate_save
   end
 
   def destroy
-    vehicle = @user.vehicles.find_by(params[:id])
+    vehicle = @user.vehicles.find_by(id: params[:id])
     vehicle.destroy
   end
 
@@ -34,7 +34,7 @@ class VehiclesController < ApplicationController
   end
 
   def vehicle_params
-    params.require(:vehicle).permit!
+    params.require(:vehicles).permit!
   end
 
   def clear_params
